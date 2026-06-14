@@ -1,152 +1,186 @@
 <!DOCTYPE html>
-<html lang="fr"> 
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cyber-sécurité</title>
+    <title>Unikin – Solutions Digitales</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- navigation -->
     <nav class="navbar">
         <div class="container">
-            <a href="images.jpeg" class="logo">unikin</a>
+            <a href="#accueil" class="logo">unikin</a>
             <div class="nav-links">
                 <a href="#accueil">Accueil</a>
                 <a href="#services">Services</a>
-                <a href="#apropos">A propos</a>
+                <a href="#apropos">À propos</a>
                 <a href="#contact">Contact</a>
             </div>
-            <button class="menu-toggle">
+            <button class="menu-toggle" aria-label="Menu">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </nav>
+
     <!-- hero section -->
-    <section id="Accueil" class="hero">
+    <section id="accueil" class="hero">
         <div class="container">
-            <div class="hero-container">
-                <h1>solutions proffessionnelles pour votre entreprise</h1>
-                <p>nous créons des solutions innovantes pour propulser votre entreprise vers le succès</p>
-                <a href="#contact" class="btn-primary">nous contacter</a>
+            <div class="hero-content">
+                <h1>Solutions professionnelles pour votre entreprise</h1>
+                <p>Nous créons des solutions innovantes pour propulser votre entreprise vers le succès.</p>
+                <a href="#contact" class="btn-primary">Nous contacter</a>
             </div>
         </div>
     </section>
+
     <!-- services section -->
-<section id="services" class="services">
-    
-<div class="container">
-        <h2 class="section-title">nos services</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="fas fa-laptop-code"></i>
-                <h3>développement Web</h3>
-                <p>création de sites web sur mesure et applications web performantes.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-chart-line"></i>
-                <h3>marketing digitales</h3
-                <p><p>stratégies digitales pour augmenter votre visibilté en ligne.</p></p>
-            
-            </div>
-            
-            
-        </div>
-        
-    </div>
-    
-</section>
-<!-- A propos -->
-<section id="apropos" class="about">
-    <div class="container">
-        <div class="about-content">
-            <h2 class="section-title"> A propos de nous</h2>
-        <p>nous sommes une équipe de proffessionnels passionnés par l'innovation digitale. avec plus de 10 ans d'expérience, nous accompagnons nos clients dans leur transformation numérique.</p>
-        <div class="stat">
-            <div class="stat">
-                <h3>150+</h3>
-                <P>projets réalisés</P>
-            </div>
-            <div class="stat">
-                <h3>50+</h3>
-                <P>clients satisfaits</P>
-            </div>
-            <div class="stat">
-                <h3>10+</h3>
-                <p>Années d'exprérience</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-</section>
-
-
-    
-    <!-- contact section -->
-    <section id="contact" class="contact">
-    <div class="container">
-        <h2 class="section-title">contactez-nous</h2>
-        <div class="contact-wrapper">
-            <form class="contact-form">
-              <br>  <input type="text" placeholder="votre nom"required>
-                <br> <input type="email" placeholder="votre email"required> 
-               <br> <textarea placeholder="votre message" rows="5"></textarea> 
-             <button type="submit" class="btn-primary">Envoyer le message</button>
-            </form>
-            <div class="contact-info">
-                <h3>nos coordonnées</h3>
-                <p><i class="fas fa-map-marker-alt"></i>kisenso 21/BIS Q: revolution C/KISENSO</p>
-                <P><i class="fas fa-phone"></i>+243 822662526</P>
-                <p><i class="fas fa-envelope"></i> gracielmawala@gmail.com</p>
-                
-            </div>
-        </div>
-    </div>
-
-</section>
-
-<footer>
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Entreprise</h3>
-                <p>votre partenaire digital de confiance.</p>
-            </div>
-            <div class="footer-section">
-                <h3>liens rapides</h3>
-                <a href="#services">services</a>
-                <a href="#apropos">A propos</a>
-                <a href="https://chat.whatsapp.com/JoiYEVeLE8h2gE4f9NDfaz">contact</a>
-            </div>
-            <div class="footer-section">
-                <h3>Suivez-nous</h3>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/graciel.mawala" class="fb-btn" target="_blank"> <i class="fab fa-facebook"></i>mon facebook</</a>
-                    <a href="https:www.intagram.com/gu.cci420?igsh=MXZ5bHlvdW9iMXFkNg=="><i class="fab fa-intagram"></i>mon intagram</a>
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Nos services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Développement Web</h3>
+                    <p>Création de sites web sur mesure et applications web performantes.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Marketing Digital</h3>
+                    <p>Stratégies digitales pour augmenter votre visibilité en ligne.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Cyber-sécurité</h3>
+                    <p>Protection de vos systèmes et données contre les menaces numériques.</p>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Université de kinshasa. tous droits réservés.</p>
+    </section>
+
+    <!-- à propos -->
+    <section id="apropos" class="about">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title">À propos de nous</h2>
+                <p>Nous sommes une équipe de professionnels passionnés par l'innovation digitale. Avec plus de 10 ans d'expérience, nous accompagnons nos clients dans leur transformation numérique.</p>
+                <div class="stats">
+                    <div class="stat">
+                        <h3>150+</h3>
+                        <p>Projets réalisés</p>
+                    </div>
+                    <div class="stat">
+                        <h3>50+</h3>
+                        <p>Clients satisfaits</p>
+                    </div>
+                    <div class="stat">
+                        <h3>10+</h3>
+                        <p>Années d'expérience</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
+    <!-- contact section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contactez-nous</h2>
+            <div class="contact-wrapper">
+                <form class="contact-form" id="contactForm">
+                    <input type="text" id="name" placeholder="Votre nom" required>
+                    <input type="email" id="email" placeholder="Votre email" required>
+                    <textarea id="message" placeholder="Votre message" rows="5" required></textarea>
+                    <button type="submit" class="btn-primary" id="submitBtn">Envoyer le message</button>
+                    <div id="formStatus" class="form-status"></div>
+                </form>
+                <div class="contact-info">
+                    <h3>Nos coordonnées</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Kisenso 21/BIS Q : Révolution C/Kisenso</p>
+                    <p><i class="fas fa-phone"></i> +243 822 662 526</p>
+                    <p><i class="fas fa-envelope"></i> gracielmawala@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</footer>
-<script src="script.js"></script>
-<style>
-body {
-background-color: rgb(44, 57, 96);
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Entreprise</h3>
+                    <p>Votre partenaire digital de confiance.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <a href="#services">Services</a>
+                    <a href="#apropos">À propos</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/graciel.mawala" target="_blank" rel="noopener" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://chat.whatsapp.com/JoiYEVeLE8h2gE4f9NDfaz" target="_blank" rel="noopener" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Université de Kinshasa. Tous droits réservés.</p>
+                <a href="/admin.html" class="admin-link">Administration</a>
+            </div>
+        </div>
+    </footer>
 
-}
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
 
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const status = document.getElementById('formStatus');
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
 
-</style>
+            btn.disabled = true;
+            btn.textContent = 'Envoi en cours…';
+            status.textContent = '';
+            status.className = 'form-status';
+
+            try {
+                const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message }),
+                });
+                if (res.ok) {
+                    status.textContent = 'Message envoyé avec succès ! Nous vous répondrons bientôt.';
+                    status.classList.add('success');
+                    e.target.reset();
+                } else {
+                    const data = await res.json();
+                    status.textContent = data.error || 'Une erreur est survenue.';
+                    status.classList.add('error');
+                }
+            } catch {
+                status.textContent = 'Erreur réseau. Veuillez réessayer.';
+                status.classList.add('error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Envoyer le message';
+            }
+        });
+    </script>
 </body>
 </html>
