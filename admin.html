@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration – Unikin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #215d7a;
+            --secondary: #1e40af;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --border: #334155;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --green: #22c55e;
+            --red: #ef4444;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .admin-header {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .admin-header .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        .admin-header .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .back-btn:hover { color: var(--text); }
+
+        /* Live indicator */
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: var(--green);
+            padding: 0.3rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Main layout */
+        .admin-main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Stats row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .stat-card .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #60a5fa;
+        }
+
+        .stat-card .sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        /* Table section */
+        .table-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .refresh-info {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Search bar */
+        .search-bar {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .search-input-wrap {
+            position: relative;
+            max-width: 360px;
+        }
+
+        .search-input-wrap i {
+            position: absolute;
+            left: 0.9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9rem;
+            padding: 0.55rem 0.9rem 0.55rem 2.3rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus { border-color: #60a5fa; }
+        .search-input::placeholder { color: var(--text-muted); }
+
+        /* Table */
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        thead th {
+            background: rgba(255,255,255,0.03);
+            padding: 0.85rem 1.5rem;
+            text-align: left;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            font-weight: 600;
+            white-space: nowrap;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border);
+            transition: background 0.15s;
+        }
+
+        tbody tr:last-child { border-bottom: none; }
+        tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+        tbody td {
+            padding: 1rem 1.5rem;
+            vertical-align: top;
+        }
+
+        .td-name {
+            font-weight: 600;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        .td-email {
+            color: #60a5fa;
+            word-break: break-all;
+        }
+
+        .td-message {
+            color: var(--text-muted);
+            max-width: 380px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .td-date {
+            white-space: nowrap;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .new-badge {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            color: var(--green);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+
+        /* Empty / loading states */
+        .state-row td {
+            text-align: center;
+            padding: 4rem 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .state-row .state-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            opacity: 0.4;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border: 3px solid var(--border);
+            border-top-color: #60a5fa;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin-bottom: 0.8rem;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* New row highlight animation */
+        @keyframes rowSlideIn {
+            from { background: rgba(96, 165, 250, 0.12); }
+            to { background: transparent; }
+        }
+
+        .row-new { animation: rowSlideIn 2s ease-out forwards; }
+
+        /* Toast */
+        #toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--card);
+            border: 1px solid var(--green);
+            color: var(--green);
+            padding: 0.8rem 1.4rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.3s, transform 0.3s;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        #toast.show { opacity: 1; transform: translateY(0); }
+
+        /* Footer */
+        .admin-footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 640px) {
+            .admin-main { padding: 1rem; }
+            .admin-header { padding: 1rem; }
+            thead th:nth-child(4), tbody td:nth-child(4) { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="admin-header">
+    <a href="/" class="logo"><i class="fas fa-shield-halved"></i> unikin</a>
+    <div class="header-right">
+        <span class="live-badge"><span class="live-dot"></span> Temps réel</span>
+        <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> Site</a>
+    </div>
+</header>
+
+<main class="admin-main">
+    <!-- Stats -->
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="label">Total messages</div>
+            <div class="value" id="statTotal">–</div>
+            <div class="sub">Depuis le début</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">Aujourd'hui</div>
+            <div class="value" id="statToday">–</div>
+            <div class="sub">Messages reçus</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">Dernière mise à jour</div>
+            <div class="value" id="statLastUpdate" style="font-size:1.1rem; padding-top:0.5rem">–</div>
+            <div class="sub">Rafraîchissement auto. 10s</div>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-section">
+        <div class="table-header">
+            <h2><i class="fas fa-inbox" style="color:#60a5fa; margin-right:0.5rem"></i>Messages reçus</h2>
+            <span class="refresh-info" id="refreshInfo">Chargement…</span>
+        </div>
+        <div class="search-bar">
+            <div class="search-input-wrap">
+                <i class="fas fa-search"></i>
+                <input class="search-input" id="searchInput" type="text" placeholder="Rechercher par nom, email ou message…">
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th>Date &amp; Heure</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr class="state-row">
+                        <td colspan="5">
+                            <div class="spinner"></div><br>Chargement des données…
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<footer class="admin-footer">
+    &copy; 2025 Université de Kinshasa – Tableau de bord administration
+</footer>
+
+<div id="toast"></div>
+
+<script>
+    let allContacts = [];
+    let knownIds = new Set();
+    let isFirstLoad = true;
+
+    function formatDate(iso) {
+        const d = new Date(iso);
+        return d.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })
+             + ' ' + d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function isToday(iso) {
+        const d = new Date(iso);
+        const now = new Date();
+        return d.getDate() === now.getDate()
+            && d.getMonth() === now.getMonth()
+            && d.getFullYear() === now.getFullYear();
+    }
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    function renderTable(data) {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = data.filter(c =>
+            c.name.toLowerCase().includes(query)
+            || c.email.toLowerCase().includes(query)
+            || c.message.toLowerCase().includes(query)
+        );
+
+        const tbody = document.getElementById('tableBody');
+
+        if (filtered.length === 0) {
+            tbody.innerHTML = `<tr class="state-row"><td colspan="5">
+                <span class="state-icon"><i class="fas fa-inbox"></i></span>
+                ${query ? 'Aucun résultat pour cette recherche.' : 'Aucun message reçu pour l\'instant.'}
+            </td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = filtered.map((c, i) => {
+            const isNew = !isFirstLoad && !knownIds.has(c.id);
+            return `<tr class="${isNew ? 'row-new' : ''}">
+                <td class="td-date">${filtered.length - i}</td>
+                <td class="td-name">${escHtml(c.name)}${isNew ? '<span class="new-badge">NOUVEAU</span>' : ''}</td>
+                <td class="td-email">${escHtml(c.email)}</td>
+                <td class="td-message">${escHtml(c.message)}</td>
+                <td class="td-date">${formatDate(c.createdAt)}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    function escHtml(str) {
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    async function fetchContacts() {
+        try {
+            const res = await fetch('/api/contacts');
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const data = await res.json();
+
+            const newCount = data.filter(c => !knownIds.has(c.id)).length;
+            if (!isFirstLoad && newCount > 0) {
+                showToast(`${newCount} nouveau${newCount > 1 ? 'x' : ''} message${newCount > 1 ? 's' : ''} !`);
+            }
+
+            allContacts = data;
+            data.forEach(c => knownIds.add(c.id));
+
+            // Update stats
+            document.getElementById('statTotal').textContent = data.length;
+            document.getElementById('statToday').textContent = data.filter(c => isToday(c.createdAt)).length;
+            const now = new Date();
+            document.getElementById('statLastUpdate').textContent =
+                now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('refreshInfo').textContent =
+                `${data.length} entrée${data.length !== 1 ? 's' : ''} · dernière màj ${now.toLocaleTimeString('fr-FR')}`;
+
+            renderTable(allContacts);
+            isFirstLoad = false;
+        } catch (err) {
+            console.error('Fetch error:', err);
+            document.getElementById('refreshInfo').textContent = 'Erreur de connexion – nouvelle tentative…';
+        }
+    }
+
+    // Search
+    document.getElementById('searchInput').addEventListener('input', () => renderTable(allContacts));
+
+    // Initial fetch + polling every 10 seconds
+    fetchContacts();
+    setInterval(fetchContacts, 10000);
+</script>
+</body>
+</html>
